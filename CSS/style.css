@@ -129,7 +129,7 @@
 
     .hero-title {
       font-family:    var(--font-serif);
-      font-size:      clamp(44px, 11vw, 50px);
+      font-size:      clamp(33, 9, 50px);
       font-weight:    300;
       color:          var(--gold);
       letter-spacing: 14px;
