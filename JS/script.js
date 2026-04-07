@@ -383,7 +383,7 @@
         method:  'POST',
         mode:    'no-cors',
         headers: { 'Content-Type': 'application/json' },
-        body:    JSON.stringify({ nom: n, prenom: fn, telephone: nc }),
+        body:    JSON.stringify({ Name: n, Firstname: fn, Phonenumber: nc }),
       })
       .then(() => launchSuccess())
       .catch(() => {
