@@ -333,7 +333,7 @@
     /* ================================================================
        RSVP
        ================================================================ */
-    const GOOGLE_SHEET_URL = 'URL';
+    const GOOGLE_SHEET_URL = 'https://script.google.com/macros/s/AKfycby9a5C6Q0dsqm6bWHlXPzqo1EA4F8gsCVzgawxor_k1Esfo7SNG_bBQOSbDIIgUwHzV/exec';
 
     function confirmRSVP() {
       const inputs     = document.querySelectorAll('.rsvp-input');
