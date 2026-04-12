@@ -1,0 +1,585 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Convergence — Invitation</title>
+<style>
+@import url('https://fonts.cdnfonts.com/css/gogoposterpunch');
+
+:root {
+  --navy:      #080F1E;
+  --navy-mid:  #0C1830;
+  --gold:      #C8A84E;
+  --gold-light:#E8D5A0;
+  --gold-dim:  rgba(200,168,78,0.25);
+  --silver:    #8B9CC0;
+  --white:     #E8ECF2;
+  --font:      'GoGoPosterPunch', sans-serif;
+}
+
+* { margin:0; padding:0; box-sizing:border-box; }
+
+body {
+  font-family: var(--font);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 100vh;
+  padding: 40px 0;
+  position: relative;
+  overflow-x: hidden;
+}
+
+#pageBg {
+  position: fixed;
+  inset: 0;
+  z-index: 0;
+  pointer-events: none;
+}
+
+
+/* ===== CARD ===== */
+.card {
+  width: 440px;
+  position: relative;
+  overflow: hidden;
+  border-radius: 6px;
+  background:
+    radial-gradient(ellipse at 50% 12%, rgba(200,168,78,0.10) 0%, transparent 45%),
+    radial-gradient(ellipse at 20% 80%, rgba(200,168,78,0.05) 0%, transparent 40%),
+    linear-gradient(170deg, #0E1F3A 0%, #080F1E 50%, #060B16 100%);
+}
+
+#cardStars {
+  position: absolute;
+  inset: 0;
+  width: 100%; height: 100%;
+  z-index: 0;
+  pointer-events: none;
+}
+
+.inner-border {
+  position: absolute;
+  inset: 14px;
+  border: 0.5px solid rgba(200,168,78,0.3);
+  border-radius: 2px;
+  z-index: 2;
+  pointer-events: none;
+}
+.inner-border::before {
+  content:'';
+  position: absolute;
+  inset: 5px;
+  border: 0.5px solid rgba(200,168,78,0.12);
+  border-radius: 1px;
+}
+
+.bg-svg {
+  position: absolute;
+  inset: 0;
+  width: 100%; height: 100%;
+  z-index: 1;
+  pointer-events: none;
+  overflow: visible;
+}
+
+/* ===== CARD BODY ===== */
+.card-body {
+  position: relative;
+  z-index: 3;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 38px 40px 32px;
+  text-align: center;
+}
+
+.logos {
+  display: flex;
+  align-items: center;
+  gap: 18px;
+  margin-bottom: 22px;
+}
+.logo-wrap {
+  width: 52px; height: 52px;
+  border-radius: 12px;
+  border: 1px solid rgba(200,168,78,0.35);
+  background: var(--navy-mid);
+  overflow: hidden;
+  display: flex; align-items: center; justify-content: center;
+  box-shadow: 0 0 20px rgba(200,168,78,0.12), 0 4px 12px rgba(0,0,0,0.5);
+}
+.logo-wrap img { width:100%; height:100%; object-fit:contain; }
+.logo-sep { width:1px; height:38px; background:linear-gradient(to bottom, transparent, var(--gold), transparent); }
+
+.title-ornament {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin-bottom: 8px;
+}
+/* shared base for ornament lines — direction set per element */
+.orn-line {
+  width: 50px; height: 1px;
+  background: linear-gradient(90deg, transparent, var(--gold));
+}
+.orn-line.rev { background: linear-gradient(90deg, var(--gold), transparent); }
+.orn-diamond {
+  width: 6px; height: 6px;
+  background: var(--gold);
+  transform: rotate(45deg);
+}
+
+.pre-title {
+  font-size: 8px;
+  letter-spacing: 7px;
+  text-transform: uppercase;
+  color: var(--gold);
+  margin-bottom: 6px;
+  opacity: 0.85;
+}
+
+.event-title {
+  font-size: 32px;
+  font-weight: 300;
+  color: var(--gold);
+  letter-spacing: 8px;
+  text-transform: uppercase;
+  line-height: 1;
+  margin-bottom: 6px;
+  text-shadow: 0 0 40px rgba(200,168,78,0.4), 0 0 80px rgba(200,168,78,0.15);
+}
+
+.slogan {
+  font-size: 9px;
+  letter-spacing: 5px;
+  text-transform: uppercase;
+  color: var(--silver);
+  margin-bottom: 16px;
+}
+
+.desc-text {
+  font-size: 11px;
+  color: var(--silver);
+  line-height: 1.85;
+  max-width: 330px;
+  margin-bottom: 24px;
+  opacity: 0.85;
+}
+
+.sep {
+  width: 100%;
+  height: 1px;
+  background: linear-gradient(90deg, transparent, rgba(200,168,78,0.3), transparent);
+  margin: 0 0 20px;
+}
+
+/* ===== 3 ICON COLUMNS ===== */
+.icon-cols {
+  display: flex;
+  width: 100%;
+  margin-bottom: 22px;
+}
+.icon-col {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 8px;
+  padding: 0 6px;
+  position: relative;
+}
+.icon-col + .icon-col::before {
+  content:'';
+  position: absolute;
+  left: 0; top: 10%; bottom: 10%;
+  width: 0.5px;
+  background: linear-gradient(to bottom, transparent, rgba(200,168,78,0.3), transparent);
+}
+.icon-wrap {
+  width: 68px; height: 68px;
+  border-radius: 50%;
+  border: 1px solid rgba(200,168,78,0.35);
+  background: radial-gradient(circle, rgba(200,168,78,0.07) 0%, transparent 70%);
+  display: flex; align-items: center; justify-content: center;
+  box-shadow: 0 0 18px rgba(200,168,78,0.08);
+}
+.icon-wrap svg { width:36px; height:36px; }
+.icon-title {
+  font-size: 9px;
+  letter-spacing: 3px;
+  text-transform: uppercase;
+  color: var(--gold);
+}
+.icon-sub {
+  font-size: 9px;
+  color: var(--silver);
+  letter-spacing: 1px;
+  line-height: 1.5;
+  opacity: 0.8;
+}
+
+/* ===== GOLD INFO BANNER ===== */
+.info-banner {
+  width: 100%;
+  background: linear-gradient(135deg, #B8923E 0%, #D4A843 40%, #C8A84E 60%, #A87C2E 100%);
+  border-radius: 6px;
+  padding: 14px 20px;
+  margin-bottom: 20px;
+  box-shadow: 0 4px 24px rgba(200,168,78,0.25), inset 0 1px 0 rgba(255,255,255,0.15);
+  position: relative;
+  overflow: hidden;
+}
+.info-banner::before {
+  content:'';
+  position: absolute;
+  inset: 0;
+  background: repeating-linear-gradient(90deg, transparent 0px, transparent 18px, rgba(0,0,0,0.04) 18px, rgba(0,0,0,0.04) 19px);
+}
+.info-banner-inner {
+  position: relative;
+  z-index: 1;
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+}
+.info-item {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 2px;
+}
+.info-item-label {
+  font-size: 7px;
+  letter-spacing: 3px;
+  text-transform: uppercase;
+  color: rgba(8,15,30,0.7);
+  font-weight: 600;
+}
+.info-item-value {
+  font-size: 12px;
+  color: #080F1E;
+  letter-spacing: 1px;
+  font-weight: 600;
+}
+.info-sep { width:1px; height:32px; background:rgba(8,15,30,0.2); }
+
+/* ===== GUEST + QR ===== */
+.guest-block {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  margin-bottom: 18px;
+}
+.guest-left { flex:1; text-align:left; }
+.guest-label {
+  font-size: 8px;
+  letter-spacing: 5px;
+  text-transform: uppercase;
+  color: var(--gold);
+  opacity: 0.7;
+  margin-bottom: 4px;
+  display: block;
+}
+.guest-name {
+  font-size: 18px;
+  color: var(--white);
+  letter-spacing: 2px;
+  border-bottom: 0.5px solid var(--gold-dim);
+  padding-bottom: 6px;
+  min-width: 140px;
+}
+.guest-right {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 6px;
+}
+.qr-box {
+  width: 70px; height: 70px;
+  background: var(--white);
+  border-radius: 8px;
+  display: flex; align-items: center; justify-content: center;
+  box-shadow: 0 2px 12px rgba(200,168,78,0.15);
+}
+.qr-box img { width:100%; height:100%; object-fit:contain;}
+.qr-label {
+  font-size: 7px;
+  letter-spacing: 3px;
+  text-transform: uppercase;
+  color: var(--silver);
+  opacity: 0.6;
+}
+
+/* ===== HONORING BANNER ===== */
+.honoring-banner {
+  width: 100%;
+  border: 0.5px solid var(--gold-dim);
+  border-radius: 4px;
+  padding: 8px 16px;
+  margin-bottom: 14px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 12px;
+  background: rgba(200,168,78,0.04);
+}
+/* reuse .orn-line for honoring lines */
+.honoring-text {
+  font-size: 8px;
+  letter-spacing: 5px;
+  text-transform: uppercase;
+  color: var(--gold);
+}
+
+/* ===== FOOTER ===== */
+.card-footer {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  align-content: center;
+  justify-content: center;
+  border-top: 0.5px solid var(--gold-dim);
+  padding-top: 14px;
+}
+.partner-slot {
+  width: 80px; height: 38px;
+  border: 0.5px dashed rgba(200,168,78,0.25);
+  border-radius: 6px;
+  display: flex; align-items: center; justify-content: center;
+}
+.partner-slot span {
+  font-size: 7px;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  color: rgba(200,168,78,0.3);
+  text-align: center;
+  line-height: 1.8;
+}
+.footer-contact {
+  text-align: center;
+  font-size: 8px;
+  color: var(--silver);
+  letter-spacing: 1px;
+  line-height: 2;
+  opacity: 0.7;
+}
+.footer-contact a { color: var(--gold-light); text-decoration: none; }
+
+/* ===== ROCKET IMAGE ===== */
+.rocket-img-wrap {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  margin-bottom: 18px;
+  position: relative;
+}
+.rocket-img-wrap::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: radial-gradient(ellipse at 50% 50%, rgba(153, 130, 61, 0.13) 0%, transparent 70%);
+  pointer-events: none;
+  border-radius: 8px;
+}
+.rocket-img {
+  width:100px;
+  height: auto;
+  mix-blend-mode: screen;
+  filter: sepia(1) saturate(3.5) hue-rotate(2deg) brightness(0.82);
+  opacity: 0.88;
+  display: block;
+}
+
+.print-note {
+  font-size: 9px;
+  color: var(--silver);
+  text-align: center;
+  opacity: 0.35;
+  max-width: 440px;
+  line-height: 2;
+  letter-spacing: 1px;
+  margin-top: 4px;
+}
+</style>
+</head>
+<body>
+
+<canvas id="pageBg"></canvas>
+
+
+
+
+<!-- ===== CARD ===== -->
+<div class="wrapper">
+<div class="card">
+
+  <canvas id="cardStars"></canvas>
+  <div class="inner-border"></div>
+
+  <!-- ===== CARD CONTENT ===== -->
+  <div class="card-body">
+
+    <div class="logos">
+      <div class="logo-wrap"><img src="images/meca.jpg" alt="MECA Club"></div>
+      <div class="logo-sep"></div>
+      <div class="logo-wrap"><img src="images/usthb.jpg" alt="USTHB"></div>
+    </div>
+
+    <div class="title-ornament">
+      <div class="orn-line"></div>
+      <div class="orn-diamond"></div>
+      <div class="orn-line rev"></div>
+    </div>
+
+    <p class="pre-title">MECA Club presents</p>
+    <h1 class="event-title">Convergence</h1>
+    <p class="slogan">One Vision, Infinite Possibilities</p>
+
+    <div class="rocket-img-wrap">
+      <img class="rocket-img" src="images/ROCKET.png" alt="Star Rocket 2026">
+    </div>
+
+    <div class="sep"></div>
+
+    <p class="desc-text">
+    MECA Club is a student-led engineering club at the University of Science and Technology Houari Boumediene (USTHB). Driven by innovation and excellence, we bring together passionate minds to push the boundaries of mechanical engineering through hands-on projects, competitions, and collaborative research.
+    </p>
+
+    <div class="guest-block">
+      <div class="guest-left">
+        <span class="guest-label">Invitation for</span>
+        <div class="guest-name">bms electric
+</div>
+      </div>
+      <div class="guest-right">
+        <div class="qr-box">
+         <img src="images/CONVERGENCE.png" alt="QR CODE">
+        </div>
+        <span class="qr-label">Scan to confirm</span>
+      </div>
+    </div>
+
+    <div class="honoring-banner">
+      <div class="orn-line" style="flex:1"></div>
+      <span class="honoring-text">Honoring Those who trusted us</span>
+      <div class="orn-line rev" style="flex:1"></div>
+    </div>
+
+    <div class="card-footer">
+      <div class="footer-contact">
+        <a href="#">@mecaclub.usthb</a><br>
+        <a href="#">mecaclub.usthb@gmail.com</a><br>
+        USTHB — Bab Ezzouar, Algiers
+      </div>
+    </div>
+
+  </div>
+</div>
+
+<p class="print-note">A5 format (148 × 210 mm) — Print on premium matte cardstock.</p>
+</div>
+
+<script>
+// ══ Single unified animation loop for both canvases ══
+(function () {
+  const pageCvs  = document.getElementById('pageBg');
+  const cardCvs  = document.getElementById('cardStars');
+  const pageCtx  = pageCvs.getContext('2d');
+  const cardCtx  = cardCvs.getContext('2d');
+
+  // page stars
+  function resizePage() { pageCvs.width = window.innerWidth; pageCvs.height = window.innerHeight; }
+  resizePage();
+  const onResize = () => resizePage();
+  window.addEventListener('resize', onResize);
+
+  const pageStars = Array.from({length: 200}, () => ({
+    x: Math.random(), y: Math.random(),
+    r: Math.random() * 1.2 + 0.2,
+    a: Math.random() * 0.5 + 0.1,
+    sp: Math.random() * 0.015 + 0.005,
+    ph: Math.random() * Math.PI * 2,
+  }));
+
+  // card stars: 3 layers + gold accents
+  function resizeCard() { cardCvs.width = cardCvs.offsetWidth; cardCvs.height = cardCvs.offsetHeight; }
+  resizeCard();
+
+  const layers = [
+    {count:80, minR:0.3, maxR:0.7, minA:0.1, maxA:0.4, sp:0.007},
+    {count:40, minR:0.7, maxR:1.3, minA:0.3, maxA:0.7, sp:0.015},
+    {count:15, minR:1.3, maxR:2.2, minA:0.5, maxA:1.0, sp:0.025},
+  ];
+  const cardStars = layers.flatMap(l => Array.from({length: l.count}, () => ({
+    x: Math.random() * cardCvs.width,
+    y: Math.random() * cardCvs.height,
+    r: Math.random() * (l.maxR - l.minR) + l.minR,
+    baseA: Math.random() * (l.maxA - l.minA) + l.minA,
+    ph: Math.random() * Math.PI * 2,
+    sp: l.sp + Math.random() * 0.005,
+  })));
+  const goldStars = Array.from({length: 10}, () => ({
+    x: Math.random() * cardCvs.width,
+    y: Math.random() * cardCvs.height,
+    r: Math.random() * 1.4 + 0.6,
+    a: Math.random() * 0.5 + 0.3,
+    sp: Math.random() * 0.02 + 0.008,
+    ph: Math.random() * Math.PI * 2,
+  }));
+
+  let t = 0;
+  let raf;
+
+  function draw() {
+    // page bg
+    pageCtx.clearRect(0, 0, pageCvs.width, pageCvs.height);
+    for (const s of pageStars) {
+      const a = s.a * (0.6 + 0.4 * Math.sin(t * s.sp + s.ph));
+      pageCtx.beginPath();
+      pageCtx.arc(s.x * pageCvs.width, s.y * pageCvs.height, s.r, 0, Math.PI * 2);
+      pageCtx.fillStyle = `rgba(200,215,240,${a})`;
+      pageCtx.fill();
+    }
+
+    // card stars
+    cardCtx.clearRect(0, 0, cardCvs.width, cardCvs.height);
+    for (const s of cardStars) {
+      const a = s.baseA * (0.7 + 0.3 * Math.sin(t * s.sp + s.ph));
+      cardCtx.beginPath();
+      cardCtx.arc(s.x, s.y, s.r, 0, Math.PI * 2);
+      cardCtx.fillStyle = `rgba(210,220,240,${a})`;
+      cardCtx.fill();
+    }
+    for (const s of goldStars) {
+      const a = s.a * (0.5 + 0.5 * Math.sin(t * s.sp + s.ph));
+      const g = cardCtx.createRadialGradient(s.x, s.y, 0, s.x, s.y, s.r * 5);
+      g.addColorStop(0, `rgba(200,168,78,${a})`);
+      g.addColorStop(1, 'rgba(200,168,78,0)');
+      cardCtx.beginPath(); cardCtx.arc(s.x, s.y, s.r * 5, 0, Math.PI * 2);
+      cardCtx.fillStyle = g; cardCtx.fill();
+      cardCtx.beginPath(); cardCtx.arc(s.x, s.y, s.r, 0, Math.PI * 2);
+      cardCtx.fillStyle = `rgba(232,213,160,${Math.min(a * 1.6, 1)})`; cardCtx.fill();
+    }
+    // nebula glow
+    const nb = cardCtx.createRadialGradient(cardCvs.width / 2, cardCvs.height * 0.14, 0, cardCvs.width / 2, cardCvs.height * 0.14, 130);
+    nb.addColorStop(0, 'rgba(200,168,78,0.05)'); nb.addColorStop(1, 'rgba(200,168,78,0)');
+    cardCtx.fillStyle = nb; cardCtx.fillRect(0, 0, cardCvs.width, cardCvs.height);
+
+    t++;
+    raf = requestAnimationFrame(draw);
+  }
+
+  draw();
+
+  // cleanup
+  window.addEventListener('pagehide', () => {
+    cancelAnimationFrame(raf);
+    window.removeEventListener('resize', onResize);
+  });
+})();
+</script>
+</body>
+</html>
