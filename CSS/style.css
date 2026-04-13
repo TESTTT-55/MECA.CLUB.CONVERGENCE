@@ -754,4 +754,6 @@
       .hero-details     { flex-direction: column; gap: 16px; }
       .hero-detail-sep  { width: 30px; height: 1px; }
       section           { padding: 60px 20px; }
+      .hero-title       { letter-spacing: 6px;font-weight: 200;font-size:clamp(33px, 1vw, 50px);
+}
     }
