@@ -1,7 +1,7 @@
 
 
     /* ================================================================
-       STAR FIELD + BACKGROUND ROCKETS
+       CHAMP D'ÉTOILES + FUSÉES EN ARRIÈRE-PLAN
        ================================================================ */
     (function () {
 
@@ -15,7 +15,7 @@
       resize();
       window.addEventListener('resize', resize);
 
-      /* — Stars — */
+      /* — Étoiles — */
       const STAR_COUNT = 180;
       const stars = Array.from({ length: STAR_COUNT }, () => ({
         x:          Math.random() * window.innerWidth,
@@ -27,7 +27,7 @@
         drift:      (Math.random() - 0.5) * 0.08,
       }));
 
-      /* — Background rockets — */
+      /* — Fusées en arrière-plan — */
       function spawnRocket() {
         const speed   = Math.random() * 2.0 + 1.5;
         const vy      = (Math.random() - 0.5) * 0.6;
@@ -48,7 +48,7 @@
       const SPAWN_INTERVAL = 1800;
 
       function drawRollingRocket(r) {
-        /* golden trail */
+        /* traînée dorée */
         const trailLen = 28;
         for (let t = 0; t < trailLen; t++) {
           const prog = t / trailLen;
@@ -70,7 +70,7 @@
           ctx.restore();
         }
 
-        /* rocket body */
+        /* corps de la fusée */
         ctx.save();
         ctx.globalAlpha = r.alpha;
         ctx.translate(r.x, r.y);
@@ -78,7 +78,7 @@
 
         const s = r.size;
 
-        /* flame */
+        /* flamme */
         const flame = ctx.createRadialGradient(-s * 0.6, 0, 0, -s * 0.6, 0, s * 0.55);
         flame.addColorStop(0,   'rgba(255,255,200,0.95)');
         flame.addColorStop(0.3, 'rgba(200,168,78,0.85)');
@@ -89,7 +89,7 @@
         ctx.ellipse(-s * 0.6, 0, s * 0.55, s * 0.22, 0, 0, Math.PI * 2);
         ctx.fill();
 
-        /* body */
+        /* corps */
         const body = ctx.createLinearGradient(0, -s * 0.22, 0, s * 0.22);
         body.addColorStop(0,   '#E8D5A0');
         body.addColorStop(0.4, '#C8A84E');
@@ -99,7 +99,7 @@
         ctx.ellipse(0, 0, s * 0.45, s * 0.18, 0, 0, Math.PI * 2);
         ctx.fill();
 
-        /* nose */
+        /* nez */
         ctx.fillStyle   = '#E8D5A0';
         ctx.shadowBlur  = 10;
         ctx.shadowColor = 'rgba(232,213,160,0.8)';
@@ -110,7 +110,7 @@
         ctx.closePath();
         ctx.fill();
 
-        /* fin top */
+        /* aileron haut */
         ctx.fillStyle  = '#C8A84E';
         ctx.shadowBlur = 0;
         ctx.beginPath();
@@ -120,7 +120,7 @@
         ctx.closePath();
         ctx.fill();
 
-        /* fin bottom */
+        /* aileron bas */
         ctx.beginPath();
         ctx.moveTo(-s * 0.1,   s * 0.18);
         ctx.lineTo(-s * 0.38,  s * 0.38);
@@ -128,7 +128,7 @@
         ctx.closePath();
         ctx.fill();
 
-        /* porthole */
+        /* hublot */
         ctx.fillStyle   = 'rgba(10,20,50,0.7)';
         ctx.beginPath();
         ctx.arc(s * 0.1, 0, s * 0.07, 0, Math.PI * 2);
@@ -165,7 +165,7 @@
         const W = canvas.width, H = canvas.height;
         ctx.clearRect(0, 0, W, H);
 
-        /* draw stars */
+        /* dessiner les étoiles */
         stars.forEach(s => {
           s.alpha += s.speed * s.twinkleDir;
           if (s.alpha >= 1)    { s.alpha = 1;    s.twinkleDir = -1; }
@@ -194,7 +194,7 @@
 
 
     /* ================================================================
-       LAUNCH ROCKET  (same style as background rockets, vertical, s=90)
+       LANCEMENT DE FUSÉE (même style que les fusées de fond, vertical, s=90)
        ================================================================ */
     function startRocketLaunch() {
       const canvas = document.getElementById('rocket-canvas');
@@ -216,7 +216,7 @@
 
         const cx = canvas.width / 2;
 
-        /* fade in / fade out */
+        /* apparition / disparition */
         if (y > canvas.height * 0.7)  alpha = Math.min(alpha + 0.08, 1);
         if (y < canvas.height * 0.12) alpha = Math.max(alpha - 0.05, 0);
 
@@ -226,7 +226,7 @@
         trail.push(y);
         if (trail.length > 35) trail.shift();
 
-        /* golden trail */
+        /* traînée dorée */
         for (let t = 0; t < trail.length; t++) {
           const prog = t / trail.length;
           ctx.save();
@@ -245,7 +245,7 @@
           ctx.restore();
         }
 
-        /* rocket — rotated -π/2 so it points upward */
+        /* fusée — rotation -π/2 pour pointer vers le haut */
         ctx.save();
         ctx.globalAlpha = alpha;
         ctx.translate(cx, y);
@@ -254,7 +254,7 @@
         flickerPhase += 0.18;
         const flickerScale = 1 + Math.sin(flickerPhase * 7) * 0.1;
 
-        /* flame */
+        /* flamme */
         ctx.save();
         ctx.scale(1, flickerScale);
         const flame = ctx.createRadialGradient(-s * 0.6, 0, 0, -s * 0.6, 0, s * 0.62);
@@ -268,7 +268,7 @@
         ctx.fill();
         ctx.restore();
 
-        /* body */
+        /* corps */
         const body = ctx.createLinearGradient(0, -s * 0.22, 0, s * 0.22);
         body.addColorStop(0,   '#E8D5A0');
         body.addColorStop(0.4, '#C8A84E');
@@ -278,7 +278,7 @@
         ctx.ellipse(0, 0, s * 0.45, s * 0.18, 0, 0, Math.PI * 2);
         ctx.fill();
 
-        /* nose */
+        /* nez */
         ctx.fillStyle   = '#E8D5A0';
         ctx.shadowBlur  = 12;
         ctx.shadowColor = 'rgba(232,213,160,0.8)';
@@ -289,7 +289,7 @@
         ctx.closePath();
         ctx.fill();
 
-        /* fin top */
+        /* aileron haut */
         ctx.fillStyle  = '#C8A84E';
         ctx.shadowBlur = 0;
         ctx.beginPath();
@@ -299,7 +299,7 @@
         ctx.closePath();
         ctx.fill();
 
-        /* fin bottom */
+        /* aileron bas */
         ctx.beginPath();
         ctx.moveTo(-s * 0.1,   s * 0.18);
         ctx.lineTo(-s * 0.38,  s * 0.38);
@@ -307,7 +307,7 @@
         ctx.closePath();
         ctx.fill();
 
-        /* porthole */
+        /* hublot */
         ctx.fillStyle   = 'rgba(10,20,50,0.7)';
         ctx.beginPath();
         ctx.arc(s * 0.1, 0, s * 0.07, 0, Math.PI * 2);
@@ -331,7 +331,7 @@
 
 
     /* ================================================================
-       RSVP
+       CONFIRMATION DE PRÉSENCE (RSVP)
        ================================================================ */
     const GOOGLE_SHEET_URL = 'https://script.google.com/macros/s/AKfycby9a5C6Q0dsqm6bWHlXPzqo1EA4F8gsCVzgawxor_k1Esfo7SNG_bBQOSbDIIgUwHzV/exec';
 
@@ -351,20 +351,20 @@
       if (!phoneRegex.test(nc))      { inputs[2].classList.add('error'); hasError = true; }
 
       if (hasError) {
-        btn.textContent    = 'Please check your info';
+        btn.textContent    = 'Veuillez vérifier vos informations';
         btn.style.background = '#b30000';
         setTimeout(() => {
-          btn.textContent    = 'Confirm Attendance';
+          btn.textContent    = 'Confirmer la présence';
           btn.style.background = '#C8A84E';
         }, 2500);
         return;
       }
 
-      btn.textContent      = 'Sending...';
+      btn.textContent      = 'Envoi...';
       btn.style.pointerEvents = 'none';
 
       function launchSuccess() {
-        btn.textContent      = 'Thank you!';
+        btn.textContent      = 'Merci !';
         btn.style.background = '#2D8B5E';
         inputs.forEach(i => {
           i.disabled       = true;
@@ -387,11 +387,11 @@
       })
       .then(() => launchSuccess())
       .catch(() => {
-        btn.textContent      = 'Error — please retry';
+        btn.textContent      = 'Erreur — veuillez réessayer';
         btn.style.background = '#b30000';
         btn.style.pointerEvents = 'auto';
         setTimeout(() => {
-          btn.textContent      = 'Confirm Attendance';
+          btn.textContent      = 'Confirmer la présence';
           btn.style.background = '#C8A84E';
         }, 3000);
       });
@@ -399,7 +399,7 @@
 
 
     /* ================================================================
-       CARD STARS  (same scheme as main starfield)
+       ÉTOILES DE LA CARTE (même style que le champ principal)
        ================================================================ */
     function initCardStars() {
       const canvas = document.getElementById('stars-canvas');
@@ -449,7 +449,7 @@
       draw();
     }
 
-    /* trigger card stars when the overlay becomes visible */
+    /* lancer les étoiles de la carte quand la fenêtre devient visible */
     const obs = new MutationObserver(function () {
       if (document.getElementById('thankyou').classList.contains('show')) {
         setTimeout(initCardStars, 300);
